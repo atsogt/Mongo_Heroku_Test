@@ -1,8 +1,8 @@
-import express from "express";
-import cors from "cors";
-import "./src/db/mongoose.js";
-import "dotenv/config";
-import { router as userRouter } from "./src/routers/user.js";
+const express = require("express");
+const cors = require("cors");
+require("./src/db/mongoose.js");
+require("dotenv").config();
+const userRouter = require("./src/routers/user.js");
 
 const app = express();
 app.use(cors());
