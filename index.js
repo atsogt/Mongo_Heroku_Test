@@ -1,10 +1,8 @@
 import express from "express";
 import cors from "cors";
+import "./src/db/mongoose.js";
 import "dotenv/config";
-import { MongoClient } from "mongodb";
-import User from "./src/models/user.js";
-import mongoose from "mongoose";
-import e from "cors";
+import { router as userRouter } from "./src/routers/user.js";
 
 const app = express();
 app.use(cors());
@@ -20,32 +18,19 @@ const port = process.env.PORT || 3000;
 //   })
 //   .catch((error) => console.log("Not Connected to mongoDB", error));
 
-const connectToDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI).then(() => {
-      console.log("Connected to database");
-    });
-  } catch (e) {
-    throw new Error(`Error connecting to the database: ${e.message}`);
-  }
-};
+// const connectToDB = async () => {
+//   try {
+//     await mongoose.connect(process.env.MONGO_URI).then(() => {
+//       console.log("Connected to database");
+//     });
+//   } catch (e) {
+//     throw new Error(`Error connecting to the database: ${e.message}`);
+//   }
+// };
 
-connectToDB();
+// connectToDB();
 
-app.get("/", async (req, res) => {
-  const users = await User.find({});
-  res.json(users);
-});
-
-app.post("/", async (req, res) => {
-  const user = await new User(req.body);
-  try {
-    await user.save();
-    res.status(200).send({ user });
-  } catch (error) {
-    res.status(400).send("Not able to post user nor send email");
-  }
-});
+app.use(userRouter);
 
 app.listen(port, () => {
   console.log(`Listening to PORT: ${port}`);
