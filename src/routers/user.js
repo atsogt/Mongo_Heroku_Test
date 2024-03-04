@@ -2,13 +2,13 @@ import express from "express";
 import User from "../models/user.js";
 const router = new express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/user", async (req, res) => {
   const users = await User.find({});
   console.log(users);
   res.json(users);
 });
 
-router.post("/", async (req, res) => {
+router.post("/user", async (req, res) => {
   const user = await new User(req.body);
   try {
     await user.save();
