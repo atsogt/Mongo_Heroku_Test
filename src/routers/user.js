@@ -1,10 +1,10 @@
 const express = require("express");
+const router = new express.Router();
 const User = require("../models/user");
 // import { auth } from "../middleware/auth.js";
+const sharp = require("sharp");
 const auth = require("../middleware/auth");
-const router = new express.Router();
 const multer = require("multer");
-
 const { sendWelcomeEmail, sendCancelationEmail } = require("../emails/account");
 
 const upload = multer({

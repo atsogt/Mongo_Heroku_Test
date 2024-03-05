@@ -2,7 +2,7 @@ const { mongoose, Schema } = require("mongoose");
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-// const Task = require("./task");
+const Task = require("./task");
 
 const userSchema = new Schema(
   {
@@ -88,6 +88,12 @@ userSchema.statics.findByCredentials = async (email, password) => {
 
   return user;
 };
+
+userSchema.virtual("tasks", {
+  ref: "Task",
+  localField: "_id",
+  foreignField: "owner",
+});
 
 userSchema.pre("save", async function (next) {
   const user = this;
