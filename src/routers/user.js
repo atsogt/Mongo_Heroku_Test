@@ -147,12 +147,12 @@ router.delete(
 
 router.delete("/users/me", auth, async (req, res) => {
   const user = req.user;
-  console.log("hit");
-  console.log(user);
+  // console.log("hit");
+  // console.log(user);
   try {
     sendCancelationEmail(user.email, user.name);
     await req.user.deleteOne({ _id: user._id });
-    res.send();
+    res.status(200).send();
   } catch (error) {
     res.status(500).send(error);
   }
