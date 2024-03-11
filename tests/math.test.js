@@ -27,16 +27,13 @@ test("Should convert C to F", () => {
 });
 
 // test("Async test demo", async () => {
-//   await setTimeout((done) => {
+//   const result = await setTimeout((done) => {
 //     expect(2).toBe(2);
 //   }, 1000);
+//   result.unref();
 // });
 
 test("Should add two numbers", async () => {
   const sum = await add(2, 5);
-  try {
-    expect(sum).toBe(5);
-  } catch (error) {
-    expect(error.toString()).toMatch("5");
-  }
+  expect(sum).toBe(7);
 });
