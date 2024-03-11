@@ -1,2 +1,4 @@
 .env
 nod_modules
+dev.env
+test.env
